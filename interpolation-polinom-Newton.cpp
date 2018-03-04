@@ -12,7 +12,16 @@ void main()
 
 	cout << "GET TABLE X: "; ipn_get_tableX();
 	cout << "GET TABLE F: "; ipn_get_tableFx();
+	ipn_set_tableDifferences();
+	ipn_get_tableDIFF();
 
+
+
+	cout << "\nGET TABLE Nn: \n"; 
+	for (int i = ipn_a_poly; i <= ipn_b_poly; i+= ipn_h_poly)
+	{
+		cout << i <<")  " << ipn(i) << '\n';
+	}
 
 	
 	system("pause");
