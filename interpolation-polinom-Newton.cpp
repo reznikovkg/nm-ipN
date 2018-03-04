@@ -2,18 +2,18 @@
 //
 #include "stdafx.h"
 #include <iostream>
-#include "IPN_data.h"
+#include "reznikovkg_IPN/IPN.h"
 
 using namespace std;
 
 void main()
 {
-	i_set_table();
-	i_get_table();
+	i_set_tableX();
 
-	for (double ii = i_a; ii <= i_b; ii+=i_h()) {
-		cout << ii << '\t' << i_lagrange(i_table, i_h(), i_n, ii) << '\n';
-	}
+	cout << "GET TABLE X: "; i_get_tableX();
+	cout << "GET TABLE F: "; i_get_tableF();
 
+
+	
 	system("pause");
 }

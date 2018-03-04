@@ -1,33 +1,16 @@
-#define _USE_MATH_DEFINES
+/**
+	author: reznikovkg
+	github: https://github.com/reznikovkg
+	email: kosrez1@yandex.ru
 
-double i_func(double x) {
-	return x*x + 2 * x + 1;
-}
+	namefile: IPN.h
+	more info: Interpolation polinom Newton, method divided differences
 
-double i_a = -15, i_b = 16;
+	target: Run mini-library 
+**/
 
-const int i_n = 3;
-
-double i_table[i_n];
-
-double i_h() {
-	return (i_b - i_a) / i_n;
-}
-void i_set_table() {
-	for (int i = 0; i <= i_n; i++)
-	{
-		i_table[i] = i*i_h();
-	}
-}
-
-void i_get_table() {
-	for (int i = 0; i <= i_n; i++)
-	{
-		std::cout<<i_table[i] << '\t';
-	}
-	std::cout << '\n';
-}
-
+#include "data.h";
+#include "main_function.h";
 
 
 
