@@ -5,16 +5,19 @@
 
 	namefile: data.h
 	
-	target: initial data
+	target: Initial data
 **/
 
 //function interpolation
-double i_func(double x) {
+double ipn_func(double x) {
 	return x*x + 2 * x + 1;
 }
 
 //interval interpolation
-double i_a = -15, i_b = 16;
+double ipn_a = -15, ipn_b = 16;
 
-//quantity intervals
-const int i_n = 2;
+//quantity points
+const int ipn_n = 7;
+
+//number of points of a polynom
+const int ipn_n_poly = 1000;

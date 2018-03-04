@@ -8,10 +8,10 @@ using namespace std;
 
 void main()
 {
-	i_set_tableX();
+	ipn_set_table_x_fx();
 
-	cout << "GET TABLE X: "; i_get_tableX();
-	cout << "GET TABLE F: "; i_get_tableF();
+	cout << "GET TABLE X: "; ipn_get_tableX();
+	cout << "GET TABLE F: "; ipn_get_tableFx();
 
 
 	
