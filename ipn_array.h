@@ -1,12 +1,24 @@
+/*
+	Author: reznikovkg
+	GitHub: https://github.com/reznikovkg
+	Email: kosrez1@yandex.ru
+
+	Project name: Interpolation polinom by Newton
+	File name: ipn_array.h
+	GitHub Repository: https://github.com/reznikovkg/nm-ipN
+*/
+
 //class array for points on decard system [or other, not problem]
 class ipn_A
 {
 private:
+
 	double** ipnA;
 	int ipnAi;
 	int ipnAj;
 
 public:
+
 	ipn_A() {}
 
 	ipn_A(int ai, int aj) {
@@ -18,16 +30,13 @@ public:
 		}
 	}
 
-	double getIPNA(int ai, int aj) {
-		return this->ipnA[ai - 1][aj - 1];
-	}
-
+	double getIPNA(int ai, int aj) { return this->ipnA[ai - 1][aj - 1]; }
+	double getIPNAa(int ai, int aj) { return this->ipnA[ai][aj]; }
 	int getAi() { return this->ipnAj; }
 	int getAj() { return this->ipnAj; }
 
-	void setIPNA(int ai, int aj, double ak) {
-		ipnA[ai - 1][aj - 1] = ak;
-	}
+	void setIPNA(int ai, int aj, double ak) { ipnA[ai - 1][aj - 1] = ak; }
+	void setIPNAa(int ai, int aj, double ak) { ipnA[ai][aj] = ak; }
 
 	void printIPNA() {
 		for (int i = 0; i < ipnAi; i++) {
