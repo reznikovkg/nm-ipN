@@ -20,13 +20,14 @@ public:
 	ipn_P(ipn_A ppoints) {
 		points = ppoints;
 		n = points.getAj();
+		diff = ipn_A(n, n);
 		setDiff();
 	}
 
 	double p(double x) {
 		return points.getIPNAa(1, 0) + pRec(x, 1, n);
 	}
-	double pRec(int x, int k, int ipn_n) {
+	double pRec(double x, int k, int ipn_n) {
 		double result = 0;
 		if (k < ipn_n) {
 			result = diff.getIPNAa(0,k);
@@ -35,7 +36,7 @@ public:
 		}
 		return result;
 	}
-	double pRecProd(int x, int k) {
+	double pRecProd(double x, int k) {
 		double result = 1;
 		for (int i = 0; i < k; i++) {
 			result *= (x - points.getIPNAa(0, i));
@@ -46,7 +47,6 @@ public:
 	void printDiff() { diff.printIPNA(); }
 
 	void setDiff() {
-		diff = ipn_A(n,n);
 		for (int i = 0; i < n; i++) {
 			for (int j = i + 1; j < n; j++) {
 				diff.setIPNAa(i,j,getDiffSum(i, j));
