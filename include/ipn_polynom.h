@@ -1,3 +1,5 @@
+#ifndef IPN_POLYNOM_H
+
 /*
 	Author: reznikovkg
 	GitHub: https://github.com/reznikovkg
@@ -8,29 +10,32 @@
 	GitHub Repository: https://github.com/reznikovkg/nm-ipN
 */
 
+#define IPN_POLYNOM_H
+
 // class interpolation polinom by Newton
-class ipn_P
+class ipn_Polynom
 {
 private:
-	ipn_A points;
+	ipn_Points points;
 	int n;
-	ipn_A diff;
+	ipn_Array diff;
 
 public:
-	ipn_P(ipn_A ppoints) {
-		points = ppoints;
-		n = points.getAj();
-		diff = ipn_A(n, n);
+	ipn_Polynom() {}
+	ipn_Polynom(ipn_Points pPoints) {
+		points = pPoints;
+		n = points.getN();
+		diff = ipn_Array(n, n);
 		setDiff();
 	}
 
 	double p(double x) {
-		return points.getIPNAa(1, 0) + pRec(x, 1, n);
+		return points.getY(1) + pRec(x, 1, n);
 	}
 	double pRec(double x, int k, int ipn_n) {
 		double result = 0;
 		if (k < ipn_n) {
-			result = diff.getIPNAa(0,k);
+			result = diff.getIPNA(0,k);
 			result *= pRecProd(x, k);
 			result += pRec(x, k + 1, ipn_n);
 		}
@@ -38,8 +43,8 @@ public:
 	}
 	double pRecProd(double x, int k) {
 		double result = 1;
-		for (int i = 0; i < k; i++) {
-			result *= (x - points.getIPNAa(0, i));
+		for (int i = 1; i <= k; i++) {
+			result *= (x - points.getX(i));
 		}
 		return result;
 	}
@@ -49,14 +54,14 @@ public:
 	void setDiff() {
 		for (int i = 0; i < n; i++) {
 			for (int j = i + 1; j < n; j++) {
-				diff.setIPNAa(i,j,getDiffSum(i, j));
+				diff.setIPNA(i,j,getDiffSum(i, j));
 			}
 		}
 	}
 	double getDiffSum(int i, int j) {
 		double sum = 0;
 		for (int sum_j = i; sum_j <= j; sum_j++) {
-			sum += (points.getIPNAa(1,sum_j) / getDiffProd(sum_j, i, j));
+			sum += (points.getY(sum_j+1) / getDiffProd(sum_j, i, j));
 		}
 		return sum;
 	}
@@ -64,11 +69,13 @@ public:
 		double prod = 1;
 		for (int prod_j = i; prod_j <= j; prod_j++) {
 			if (prod_j != sum_j) {
-				prod *= (points.getIPNAa(0, sum_j) - points.getIPNAa(0, prod_j));
+				prod *= (points.getX(sum_j+1) - points.getX(prod_j+1));
 			}
 		}
 		return prod;
 	}
 
-	~ipn_P() {}
+	~ipn_Polynom() {}
 };
+
+#endif IPN_POLYNOM_H
