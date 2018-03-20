@@ -1,31 +1,30 @@
-#ifndef IPN_POLYNOM_H
+#ifndef NM_IPN_CLASS_H
 
 /*
 	Author: reznikovkg
 	GitHub: https://github.com/reznikovkg
 	Email: kosrez1@yandex.ru
 
-	Project name: Interpolation polinom by Newton
-	File name: ipn_polynom.h
+	File: nm-ipN-class.h
 	GitHub Repository: https://github.com/reznikovkg/nm-ipN
 */
 
-#define IPN_POLYNOM_H
+#define NM_IPN_CLASS_H
 
 // class interpolation polinom by Newton
 class ipn_Polynom
 {
 private:
-	ipn_Points points;
+	nm_Points points;
 	int n;
-	ipn_Array diff;
+	nm_Array diff;
 
 public:
 	ipn_Polynom() {}
-	ipn_Polynom(ipn_Points pPoints) {
+	ipn_Polynom(nm_Points pPoints) {
 		points = pPoints;
 		n = points.getN();
-		diff = ipn_Array(n, n);
+		diff = nm_Array(n, n);
 		setDiff();
 	}
 
@@ -35,7 +34,7 @@ public:
 	double pRec(double x, int k, int ipn_n) {
 		double result = 0;
 		if (k < ipn_n) {
-			result = diff.getIPNA(0,k);
+			result = diff.getNMA(0,k);
 			result *= pRecProd(x, k);
 			result += pRec(x, k + 1, ipn_n);
 		}
@@ -49,12 +48,12 @@ public:
 		return result;
 	}
 
-	void printDiff() { diff.printIPNA(); }
+	void printDiff() { diff.printNMA(); }
 
 	void setDiff() {
 		for (int i = 0; i < n; i++) {
 			for (int j = i + 1; j < n; j++) {
-				diff.setIPNA(i,j,getDiffSum(i, j));
+				diff.setNMA(i,j,getDiffSum(i, j));
 			}
 		}
 	}
@@ -78,4 +77,4 @@ public:
 	~ipn_Polynom() {}
 };
 
-#endif IPN_POLYNOM_H
+#endif NM_IPN_CLASS_H
